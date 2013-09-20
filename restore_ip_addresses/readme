@@ -1,0 +1,11 @@
+在forward的时候进行强有效判断，在反向的时候只做简单判断就可以了。
+用一个数组（5个元素）记录每一小段ip地址的起始index，最后一个元素是s.size()，用作哨兵。
+用一个变量curi记录当前操作的小段index，另一个变量forward表示状态。
+如果forward==true，那么首先判断当前小段是否合法，如果有效那么进入下一小段进行处理；否则forward反转。
+如果forward==false，那么判断当前小数点是否可以右移，可以的话右移，forward置位；否则curi回退，处理上一小段。
+
+细节很重要：
+
+valid = valid && remain <= remainmax && remain >= (4 - curi);
+
+一开始最后一个条件没写，结果总报运行时错误。
