@@ -1,0 +1,21 @@
+题目给定3个字符串(s1,s2,s3)，看s3是否是有s1和s2通过交织可以得到。
+
+
+可以这么来看这个问题，每次从s3开头拿出来一个字符，如果s1的开头或者s2的开头有这个字符的话，就消掉相应的字符，把这个操作记为del。
+这样看待这个问题的话，好像挺简单的，很直观。
+但是当遇到case：s1=aa,s2=ab,s3=abaa，的时候可以看出当s1和s2同时可以进行del操作的时候，选择就成了一个必须考虑的问题。
+假如最开始那个a，消掉了s1中的第一个a，那么就进行不下去了。
+
+所以最后这个问题其实并不那么简单，假如函数
+
+bool isInterleaving(string &s1, int len1, string &s2, int len2, string &s3, int len3);
+
+表示子问题：si取前leni个字符的话，那么实际上可以得到这样的一个公式：
+
+	isInterleaving(s1,len1,s2,len2,s3,len3) 
+	=   (s3.lastChar == s1.lastChar) && isInterleaving(s1,len1 - 1,s2,len2,s3,len3 - 1)
+||(s3.lastChar == s2.lastChar) && isInterleaving(s1,len1,s2,len2 - 1,s3,len3 - 1)
+
+	由于len3 === len1 + len2，所以这个问题里面实际上存在着两个变量，是一个二维动态规划题目。
+	从矩阵的角度来看的话，每一个元素的值，依赖于它的上边和左边两个值。
+	最后写出程序，用24ms过大测试集合。
