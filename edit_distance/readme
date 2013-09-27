@@ -1,0 +1,22 @@
+tr1变成str2
+sstr1(i)是str1的子串，范围[0到i），sstr1(0)是空串
+sstr2(j)是str2的子串，同上
+d(i,j)表示将sstr1(i)变成sstr2(j)的编辑距离
+
+首先d(0,t),0<=t<=str1.size()和d(k,0)是很显然的。
+当我们要计算d(i,j)时，即计算sstr1(i)到sstr2(j)之间的编辑距离,
+	此时，设sstr1(i)形式是somestr1c；sstr2(i)形如somestr2d的话，
+	将somestr1变成somestr2的编辑距离已知是d(i-1,j-1)
+	将somestr1c变成somestr2的编辑距离已知是d(i,j-1)
+将somestr1变成somestr2d的编辑距离已知是d(i-1,j)
+	那么利用这三个变量，就可以递推出d(i,j)了：
+	如果c==d，显然编辑距离和d(i-1,j-1)是一样的
+	如果c!=d，情况稍微复杂一点，
+
+	如果将c替换成d，编辑距离是somestr1变成somestr2的编辑距离 + 1，也就是d(i-1,j-1) + 1
+	如果在c后面添加一个字d，编辑距离就应该是somestr1c变成somestr2的编辑距离 + 1，也就是d(i,j-1) + 1
+	如果将c删除了，那就是要将somestr1编辑成somestr2d，距离就是d(i-1,j) + 1
+
+	那最后只需要看着三种谁最小，就采用对应的编辑方案了。
+
+	递推公式出来了，程序也就出来了.
