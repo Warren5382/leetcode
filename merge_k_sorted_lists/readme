@@ -1,0 +1,3 @@
+construct a heap to store the head node of lists.
+every time, just choose the max node from the lists.
+and then rearrange the heap.
