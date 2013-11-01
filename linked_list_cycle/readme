@@ -1,0 +1,3 @@
+create two pointer the fast, the slow.
+the fast move two node once time, while the slow only move one node once.
+when the slow catch the fast, the list has an cycle. otherwise, no cycle.
