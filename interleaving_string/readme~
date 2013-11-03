@@ -19,7 +19,3 @@ bool isInterleaving(string &s1, int len1, string &s2, int len2, string &s3, int 
 	由于len3 === len1 + len2，所以这个问题里面实际上存在着两个变量，是一个二维动态规划题目。
 	从矩阵的角度来看的话，每一个元素的值，依赖于它的上边和左边两个值。
 	最后写出程序，用24ms过大测试集合。
-
-
-另外一种DP思路
-用DP[i][j]表示s1的前i个字符和s2的前j个字符，能够组成s3前i＋j－1个字符的交织。
